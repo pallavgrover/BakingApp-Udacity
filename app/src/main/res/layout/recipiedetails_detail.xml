@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+
+    <!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/tv_step_fragment_directions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_step_long_desc"
+        tools:text="Step Directions"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp" />
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/exo_step_fragment_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"
+        android:layout_height="100dp">
+
+        <Button
+            android:id="@+id/previousStep"
+            android:elevation="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            android:text="@string/previous_step"/>
+
+        <Button
+            android:id="@+id/nextStep"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:elevation="6dp"
+            android:textColor="@android:color/black"
+            android:text="@string/next_step"/>
+    </LinearLayout>
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+</LinearLayout>
