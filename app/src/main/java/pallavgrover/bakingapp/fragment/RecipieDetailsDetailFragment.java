@@ -260,6 +260,7 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
         @Override
         public void onPause() {
             mExoPlayer.setPlayWhenReady(false);
+            releasePlayer();
         }
 
         @Override

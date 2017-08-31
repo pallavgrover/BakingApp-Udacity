@@ -52,6 +52,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 context.startActivity(i);
             }
         });
+        if(mRecipeList.get(position).getImage() != null){
+            Glide.with(context).load(mRecipeList.get(position).getImage()).into(holder.image);
+        }
 //        holder.tvIngredientCount.setText(String.valueOf(holder.mRecipe.getIngredients().size()));
 //        holder.tvServingCount.setText(String.valueOf(holder.mRecipe.getServings()));
 //        holder.tvStepCount.setText(String.valueOf(holder.mRecipe.getSteps().size()));
@@ -73,6 +76,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             super(v);
             tvRecipeName = (TextView) v.findViewById(R.id.tv_recipe_name);
             cardView = (CardView) v.findViewById(R.id.cv_recipe_list);
+            image = v.findViewById(R.id.iv_recipe_image);
         }
     }
 }

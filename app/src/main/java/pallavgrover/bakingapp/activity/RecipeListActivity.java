@@ -3,6 +3,7 @@ package pallavgrover.bakingapp.activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -87,12 +88,13 @@ public class RecipeListActivity extends AppCompatActivity {
                 recipeArrayList = response.body();
                 recipeAdapter = new RecipeAdapter(recipeArrayList,RecipeListActivity.this);
                 recyclerView.setAdapter(recipeAdapter);
-
             }
 
             @Override
             public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
                 // Log error here since request failed
+                Snackbar.make(findViewById(R.id.recipie_recyler),
+                        "Error fetching list", Snackbar.LENGTH_SHORT);
                 Log.e("", t.toString());
             }
         });
