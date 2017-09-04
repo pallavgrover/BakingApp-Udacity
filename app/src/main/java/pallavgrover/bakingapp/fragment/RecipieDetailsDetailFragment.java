@@ -76,6 +76,9 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
     private SimpleExoPlayerView exoStepFragmentPlayerView;
     private Recipe recipie;
     private ImageView thumbnail;
+    private boolean playWhenReady = true;
+    private int currentWindow;
+    private long playBackPosition;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -212,17 +215,21 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             exoStepFragmentPlayerView.setPlayer(mExoPlayer);
+            mExoPlayer.seekTo(currentWindow, playBackPosition);
             mExoPlayer.addListener(this);
             String userAgent = Util.getUserAgent(getContext(), "RecipeStepVideo");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(playWhenReady);
         }
     }
 
     private void releasePlayer() {
         if(mExoPlayer!=null) {
+            playWhenReady = mExoPlayer.getPlayWhenReady();
+            currentWindow = mExoPlayer.getCurrentWindowIndex();
+            playBackPosition = mExoPlayer.getCurrentPosition();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -280,6 +287,14 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!TextUtils.isEmpty(step.getVideoURL())) {
+            initializePlayer(Uri.parse(step.getVideoURL()));
+        }
     }
 
     @Override
