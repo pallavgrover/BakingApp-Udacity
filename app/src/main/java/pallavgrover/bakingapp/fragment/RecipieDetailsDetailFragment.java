@@ -13,14 +13,17 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -72,6 +75,7 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
     private PlaybackStateCompat.Builder mStateBuilder;
     private SimpleExoPlayerView exoStepFragmentPlayerView;
     private Recipe recipie;
+    private ImageView thumbnail;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -107,6 +111,11 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
         }
         Button mPrevStep = (Button) rootView.findViewById(R.id.previousStep);
         Button mNextstep = (Button) rootView.findViewById(R.id.nextStep);
+
+        if(!TextUtils.isEmpty(step.getThumbnailURL())){
+            thumbnail = (ImageView) rootView.findViewById(R.id.stepThumbnail);
+            Glide.with(this).load(thumbnail).into(thumbnail);
+        }
 
         if(isInLandscapeMode(getActivity()) && !getResources().getBoolean(R.bool.isTab)){
             hideSystemUI();
@@ -260,7 +269,6 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
         @Override
         public void onPause() {
             mExoPlayer.setPlayWhenReady(false);
-            releasePlayer();
         }
 
         @Override
@@ -272,12 +280,18 @@ public class RecipieDetailsDetailFragment extends Fragment implements ExoPlayer.
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         releasePlayer();
         if(mMediaSession!=null) {
             mMediaSession.setActive(false);
         }
     }
-    public boolean isInLandscapeMode( Context context ) {
+
+    public boolean isInLandscapeMode(Context context ) {
         return (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
     }
 }

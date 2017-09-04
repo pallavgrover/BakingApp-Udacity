@@ -38,6 +38,15 @@
         android:visibility="visible"
         android:layout_height="100dp">
 
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/stepThumbnail"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/widget_margin"
+            android:layout_marginEnd="@dimen/widget_margin"
+            android:src="@mipmap/ic_launcher"/>
+
         <Button
             android:id="@+id/previousStep"
             android:elevation="6dp"
