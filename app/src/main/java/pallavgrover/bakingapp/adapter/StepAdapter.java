@@ -118,8 +118,8 @@ public class StepAdapter extends RecyclerView.Adapter {
 
         public StepHolder(View v) {
             super(v);
-            tvRecipeName = (TextView) v.findViewById(R.id.tv_recipe_name);
-            cardView = (CardView) v.findViewById(R.id.cv_recipe_list);
+            tvRecipeName = (TextView) v.findViewById(R.id.tv_recipe_name1);
+            cardView = (CardView) v.findViewById(R.id.cv_recipe_list1);
         }
     }
 }

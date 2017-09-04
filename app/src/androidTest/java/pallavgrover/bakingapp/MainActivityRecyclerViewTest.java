@@ -28,7 +28,7 @@ import pallavgrover.bakingapp.activity.RecipeListActivity;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityRecyclerViewTest {
 
-    public static final String RECIPE_NAME = "Brownies";
+    public static final String RECIPE_NAME = "Nutella Pie";
 
     @Rule
     public ActivityTestRule<RecipeListActivity> mActivityTestRule = new ActivityTestRule<>(RecipeListActivity.class);
